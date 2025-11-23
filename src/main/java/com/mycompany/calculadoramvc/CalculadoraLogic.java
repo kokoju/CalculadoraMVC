@@ -8,8 +8,11 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.Timer;
 
@@ -20,26 +23,71 @@ import javax.swing.Timer;
 public class CalculadoraLogic implements ActionListener {  // Clase encargada de manejar la lógica del Frame
     // Atributos
     private CalculadoraFrame cliente;  // Mantenemos una referencia al cliente
-    private File archivo;  // Creamos también una referencia al archivo de bitácora dónde escribimos
+    private DataFrame dataFrame;  // Referencia vacía para el DataFrame
+    private File archivoBitacora;  // Creamos también una referencia al archivo de bitácora dónde escribimos
+    private File archivoMemoria;  // Se crea una referencia para la memoria
+    private ArrayList<Double> arregloMemoria;  // Creamos un arreglo dónde guardar los elementos de memoria
     private boolean puedeRecibirInput;  // Booleano para indicar si el usuario puede escribir o no. Es necesario para dar errores
     
     // Constructor
     public CalculadoraLogic(CalculadoraFrame cliente) {
         this.cliente = cliente;
+        this.dataFrame = new DataFrame();  // Referencia vacía para el DataFrame
         registroBotones();  // Registramos botones
         this.puedeRecibirInput = true;  // Por defecto, los botones están activos
-        this.archivo = new File("bitácora.txt");
+        this.archivoBitacora = new File("bitacora.txt");
+        this.archivoMemoria = new File("memoria.txt");
+        this.arregloMemoria = leerNumerosMemoria();
     }
     
     // Métodos
     public void registrarEnBitacora(String mensaje) {  // Para la escritura de las operaciones en la bitácora, hacemos una función que escriba en el archivo
-        try (FileWriter writer = new FileWriter(archivo, true)) {  // Intentamos crear una escritor en el archivo. Además, el 'true' indica que el contenido que pongamos se va a añadir por medio de un .append, permitiendo mantener registros anteriores
+        try (FileWriter writer = new FileWriter(this.archivoBitacora, true)) {  // Intentamos crear una escritor en el archivo. Además, el 'true' indica que el contenido que pongamos se va a añadir por medio de un .append, permitiendo mantener registros anteriores
             writer.write(mensaje);  // Se escribe en el archivo
         } catch (IOException e) {  // Si hay una excepción al intentar escribir
             this.enviarError("NO SE PUEDE ESCRIBIR EN LA BITÁCORA");  // Si llega a existir un error al intentar escribir, se muestra en la pantalla de la calculadora
         }
     }
-
+    
+    public ArrayList<Double> leerNumerosMemoria() {  // Para leer nuestro archivo de memoria, creamos un Scanner que va a ir buscando números registrados
+        ArrayList<Double> arregloObtenido = new ArrayList<>();  // Creamos un arreglo para almacenar lo obtenido
+        try {
+            Scanner sc = new Scanner(this.archivoMemoria);  // Se crea el Scanner
+            while (sc.hasNextInt()) {  // Mientas siga habiendo números por leer 
+                double num = sc.nextDouble();  // Se obtienen y se imprimen
+                arregloObtenido.add(num);
+            }
+            sc.close();  // Cerramos el archivo
+            return arregloObtenido;  // Devolvemos el arreglo
+        } catch (FileNotFoundException e) {
+            this.enviarError("NO SE PUEDE ACCEDER A LA MEMORIA");
+            return null;
+        }
+    }
+    
+    public void insertarElementoMemoria(double num) {  // Función encargada de tomar un double y añadirlo a la memoria. Si esta se pasa de 10, resta el elemento más antiguo
+        this.arregloMemoria.addFirst(num);
+        if (this.arregloMemoria.size() > 10)  // Si nos pasamos del límite
+            this.arregloMemoria.removeLast();  // Eliminamos el elemento más antiguo 
+        this.registrarEnMemoria();
+        this.actualizarEnData();
+    }
+    
+    public void registrarEnMemoria()  {  // Así como tomamos de la memoria, debemos escribir el contenido que tenemos
+        try (FileWriter writer = new FileWriter(this.archivoMemoria, false)) {  // Intentamos crear una escritor en el archivo. El 'false' borra todo el contenido que estaba anteriormente
+            for (Double num : arregloMemoria) {
+                writer.write(num + "\n");  // Se escribe en el archivo, saltando espacios por cada número
+            }
+        } catch (IOException e) {  // Si hay una excepción al intentar escribir
+            this.enviarError("NO SE PUEDE ESCRIBIR EN LA MEMORIA");  // Si llega a existir un error al intentar escribir, se muestra en la pantalla de la calculadora
+        }
+    }
+    
+    public void actualizarEnData() {  // El espacio de texto de DataFrame debe tener la info actualizada, entonces eso se llama en cada iteración
+        this.dataFrame.getTxaData().setText("");  // Se limpia el espacio
+        for (double num : arregloMemoria)  // Se escribe cada número en el espacio
+            this.dataFrame.getTxaData().setText(this.dataFrame.getTxaData().getText() + num + "\n");
+    }
 
     public void registroBotones() {
         // setActionCommand() sirve le asigna un nombre String a la acción que dispara un botón, por lo que eso usaremos para hacer un switch después
@@ -204,7 +252,7 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
     }
     
     public void actionBtnData() {
-        // this.cliente.getTxaPantalla().setText(this.cliente.getTxaPantalla().getText() + " + ");
+        dataFrame.setVisible(true);
     }
     
     public void actionBtnDiv() {
@@ -214,7 +262,7 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
             this.cliente.getTxaPantalla().setText(this.cliente.getTxaPantalla().getText() + " ÷ ");
     }
     
-    public void actionBtnDot() {
+    public void actionBtnDot() {     
         this.cliente.getTxaPantalla().setText(this.cliente.getTxaPantalla().getText() + ".");
     }
     
@@ -370,7 +418,6 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
             return "0"; 
         return cadena;
     }
-        
     
     // Funciones para enviar mensajes
     public void enviarError(String error) {
