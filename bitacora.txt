@@ -1,0 +1,19 @@
+9.0*2.0 = 18.0
+5.0*2.0 = 10.0
+10.0*6.0 = 60.0
+60.0-50.0 = 10.0
+10.0+30.0 = 40.0
+40.0*2.0 = 80.0
+3.0 fue añadido a la memoria
+6.0 fue añadido a la memoria
+33.0 fue añadido a la memoria
+6.0 fue añadido a la memoria
+2.0 fue añadido a la memoria
+4.0 fue añadido a la memoria
+5.0 fue añadido a la memoria
+22.0 fue añadido a la memoria
+6.0 fue añadido a la memoria
+7.0 fue añadido a la memoria
+5.0 fue añadido a la memoria
+10.0 fue añadido a la memoria
+622.0 fue añadido a la memoria

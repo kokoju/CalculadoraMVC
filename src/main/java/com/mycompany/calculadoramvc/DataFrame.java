@@ -37,7 +37,9 @@ public class DataFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        txaData.setBackground(new java.awt.Color(255, 255, 255));
         txaData.setColumns(20);
+        txaData.setForeground(new java.awt.Color(0, 0, 0));
         txaData.setRows(5);
         txaData.setFocusable(false);
         jScrollPane1.setViewportView(txaData);

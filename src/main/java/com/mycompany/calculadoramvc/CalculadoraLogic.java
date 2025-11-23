@@ -37,7 +37,16 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
         this.puedeRecibirInput = true;  // Por defecto, los botones están activos
         this.archivoBitacora = new File("bitacora.txt");
         this.archivoMemoria = new File("memoria.txt");
-        this.arregloMemoria = leerNumerosMemoria();
+        
+        try {  // Se intentan crear los archivos, en caso de que no existan
+            if (!archivoBitacora.exists()) archivoBitacora.createNewFile();
+            if (!archivoMemoria.exists()) archivoMemoria.createNewFile();
+            this.arregloMemoria = leerNumerosMemoria();
+        } 
+        catch (IOException e) {  // Si no se puede, da error
+            this.enviarError("NO SE PUDO CREAR LOS ARCHIVOS");
+        }
+        System.out.println(arregloMemoria.size());
     }
     
     // Métodos
@@ -53,7 +62,7 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
         ArrayList<Double> arregloObtenido = new ArrayList<>();  // Creamos un arreglo para almacenar lo obtenido
         try {
             Scanner sc = new Scanner(this.archivoMemoria);  // Se crea el Scanner
-            while (sc.hasNextInt()) {  // Mientas siga habiendo números por leer 
+            while (sc.hasNextDouble()) {  // Mientas siga habiendo números por leer 
                 double num = sc.nextDouble();  // Se obtienen y se imprimen
                 arregloObtenido.add(num);
             }
@@ -155,8 +164,6 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
                 case "btnSubNum" -> actionBtnSubNum();
             }
         }
-        
-
     }
     
     public void actionBtn0() {
@@ -240,6 +247,7 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
                 String resultadoEntero = obtenerBinarioEntero(num);
                 String resultadoFraccionario = obtenerBinarioFraccionario(num);
                 this.cliente.getTxaPantalla().setText(resultadoEntero + "." + resultadoFraccionario);
+                this.registrarEnBitacora("Bin(" + num + ") = " + resultadoEntero + "." + resultadoFraccionario + "\n");  // Se escribe la operación en la bitácora
             }
             else {
                 this.enviarError("NO HAY ARGUMENTOS, REINTENTAR");
@@ -253,6 +261,7 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
     
     public void actionBtnData() {
         dataFrame.setVisible(true);
+        actualizarEnData();
     }
     
     public void actionBtnDiv() {
@@ -267,7 +276,20 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
     }
     
     public void actionBtnMAdd() {
-        // this.cliente.getTxaPantalla().setText(this.cliente.getTxaPantalla().getText() + " ÷ ");
+        if (verificarSiOpValida())
+            actionBtnRes();  // Llama a la operación de resultado, la cual hace algo si la operación es válida
+        if (this.puedeRecibirInput) {  // Si al llamar a la acción no hubo errores, se imprime el símbolo
+            String[] partes = obtenerPartes();
+            if (partes.length > 0) {
+                double num = Double.parseDouble(partes[0]);  // Transformarmos el texto que tenemos en un double
+                this.insertarElementoMemoria(num);  // Lo insertamos en la memoria
+                this.enviarMensaje("EL NÚMERO " + num + " FUE INTRODUCIDO EN LA MEMORIA");
+                this.registrarEnBitacora(num + " fue añadido a la memoria\n");  // Se escribe la operación en la bitácora
+            }
+            else {
+                this.enviarError("NO HAY ARGUMENTOS, REINTENTAR");
+            }
+        }
     }
     
     public void actionBtnMul() {
@@ -315,7 +337,7 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
                 Operacion op = Operacion.desdeSimbolo(partes[1]);  // Obtenemos la operación que debemos hacer
                 double resultado = op.aplicarOperacion(a, b);  // Obtenemos resultado
                 this.cliente.getTxaPantalla().setText(resultado + "");  // Escribimos el resultado en pantalla 
-                this.registrarEnBitacora(a + op.getSimbolo() + b + " = " + resultado + "\n");  // Se escribe la operación en la bitácora
+                this.registrarEnBitacora(a + " " + op.getSimbolo() + " " + b + " = " + resultado + "\n");  // Se escribe la operación en la bitácora
             }
         }
         else {
