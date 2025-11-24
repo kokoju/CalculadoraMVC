@@ -235,6 +235,17 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
                 this.registrarEnBitacora(" = " + resultado + "\n");  // Se escribe el resultado
             }
         }
+        else {  // Si no hay ningún elemento, el Average se hace con los elementos de la memoria
+            double resultado = 0;  // Igualmente, se establece un resultado
+            this.registrarEnBitacora("Promedio de ");  // Se escribe la operación en la bitácora (al ser memoria y siempre tener el mismo formato, no debemos hacer las mismas verificaciones
+            for (double num : this.arregloMemoria) {
+                resultado += num;
+                this.registrarEnBitacora(num + " "); 
+            }
+            resultado /= this.arregloMemoria.size();
+            this.cliente.getTxaPantalla().setText(resultado + "");
+            this.registrarEnBitacora(" = " + resultado + "\n");  // Se escribe el resultado
+        }
     }
     
     public void actionBtnBinary() {
