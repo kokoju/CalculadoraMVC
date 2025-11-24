@@ -1,6 +1,7 @@
 com/mycompany/calculadoramvc/CalculadoraFrame.class
-com/mycompany/calculadoramvc/DataFrame.class
 com/mycompany/calculadoramvc/Operacion.class
-com/mycompany/calculadoramvc/CalculadoraFrame$2.class
 com/mycompany/calculadoramvc/CalculadoraFrame$1.class
+com/mycompany/calculadoramvc/CalculadoraLogic$1.class
+com/mycompany/calculadoramvc/DataFrame.class
+com/mycompany/calculadoramvc/CalculadoraFrame$2.class
 com/mycompany/calculadoramvc/CalculadoraLogic.class

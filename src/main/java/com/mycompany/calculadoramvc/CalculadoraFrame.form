@@ -167,6 +167,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="BINARY"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -206,6 +207,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="DATA"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDataActionPerformed"/>
@@ -217,6 +219,7 @@
           <Font name="Liberation Sans" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="7"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnPrime">
@@ -231,6 +234,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="PRIME"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btn8">
@@ -239,6 +243,7 @@
           <Font name="Liberation Sans" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="8"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn8ActionPerformed"/>
@@ -250,6 +255,7 @@
           <Font name="Liberation Sans" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="9"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btn4">
@@ -258,6 +264,7 @@
           <Font name="Liberation Sans" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="4"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btn5">
@@ -266,6 +273,7 @@
           <Font name="Liberation Sans" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="5"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btn6">
@@ -274,6 +282,7 @@
           <Font name="Liberation Sans" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="6"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btn1">
@@ -282,6 +291,7 @@
           <Font name="Liberation Sans" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="1"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btn2">
@@ -290,6 +300,7 @@
           <Font name="Liberation Sans" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="2"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btn3">
@@ -298,6 +309,7 @@
           <Font name="Liberation Sans" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="3"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btn0">
@@ -306,6 +318,7 @@
           <Font name="Liberation Sans" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnClear">
@@ -317,6 +330,7 @@
           <Font name="Liberation Sans" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="CLEAR"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnDiv">
@@ -328,6 +342,7 @@
           <Font name="Liberation Sans" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="&#xf7;"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnDot">
@@ -336,6 +351,7 @@
           <Font name="Liberation Sans" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="."/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnAverage">
@@ -344,6 +360,7 @@
           <Font name="Liberation Sans" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Average"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnMul">
@@ -356,6 +373,7 @@
         </Property>
         <Property name="text" type="java.lang.String" value="*"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnSub">
@@ -367,6 +385,7 @@
           <Font name="Liberation Sans" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="-"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnMAdd">
@@ -375,6 +394,7 @@
           <Font name="Liberation Sans" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="M+"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnAdd">
@@ -386,6 +406,7 @@
           <Font name="Liberation Sans" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="+"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnRes">
@@ -394,6 +415,7 @@
           <Font name="Liberation Sans" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="="/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnSpace">
@@ -408,6 +430,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="SPACE"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnSubNum">
@@ -416,6 +439,7 @@
           <Font name="Liberation Sans" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="(-)"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
   </SubComponents>

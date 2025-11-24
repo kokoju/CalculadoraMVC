@@ -70,6 +70,7 @@ public class CalculadoraFrame extends javax.swing.JFrame {  // Frame que tiene n
         btnBinary.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnBinary.setForeground(new java.awt.Color(255, 255, 255));
         btnBinary.setText("BINARY");
+        btnBinary.setFocusable(false);
 
         txaPantalla.setBackground(new java.awt.Color(255, 255, 255));
         txaPantalla.setColumns(20);
@@ -83,6 +84,7 @@ public class CalculadoraFrame extends javax.swing.JFrame {  // Frame que tiene n
         btnData.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnData.setForeground(new java.awt.Color(255, 255, 255));
         btnData.setText("DATA");
+        btnData.setFocusable(false);
         btnData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDataActionPerformed(evt);
@@ -91,14 +93,17 @@ public class CalculadoraFrame extends javax.swing.JFrame {  // Frame que tiene n
 
         btn7.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btn7.setText("7");
+        btn7.setFocusable(false);
 
         btnPrime.setBackground(new java.awt.Color(0, 0, 0));
         btnPrime.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnPrime.setForeground(new java.awt.Color(255, 255, 255));
         btnPrime.setText("PRIME");
+        btnPrime.setFocusable(false);
 
         btn8.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btn8.setText("8");
+        btn8.setFocusable(false);
         btn8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn8ActionPerformed(evt);
@@ -107,68 +112,87 @@ public class CalculadoraFrame extends javax.swing.JFrame {  // Frame que tiene n
 
         btn9.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btn9.setText("9");
+        btn9.setFocusable(false);
 
         btn4.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btn4.setText("4");
+        btn4.setFocusable(false);
 
         btn5.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btn5.setText("5");
+        btn5.setFocusable(false);
 
         btn6.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btn6.setText("6");
+        btn6.setFocusable(false);
 
         btn1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btn1.setText("1");
+        btn1.setFocusable(false);
 
         btn2.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btn2.setText("2");
+        btn2.setFocusable(false);
 
         btn3.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btn3.setText("3");
+        btn3.setFocusable(false);
 
         btn0.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btn0.setText("0");
+        btn0.setFocusable(false);
 
         btnClear.setBackground(new java.awt.Color(255, 0, 0));
         btnClear.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnClear.setText("CLEAR");
+        btnClear.setFocusable(false);
 
         btnDiv.setBackground(new java.awt.Color(0, 204, 255));
         btnDiv.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnDiv.setText("÷");
+        btnDiv.setFocusable(false);
 
         btnDot.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnDot.setText(".");
+        btnDot.setFocusable(false);
 
         btnAverage.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnAverage.setText("Average");
+        btnAverage.setFocusable(false);
 
         btnMul.setBackground(new java.awt.Color(0, 204, 255));
         btnMul.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnMul.setText("*");
         btnMul.setToolTipText("");
+        btnMul.setFocusable(false);
 
         btnSub.setBackground(new java.awt.Color(0, 204, 255));
         btnSub.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnSub.setText("-");
+        btnSub.setFocusable(false);
 
         btnMAdd.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnMAdd.setText("M+");
+        btnMAdd.setFocusable(false);
 
         btnAdd.setBackground(new java.awt.Color(0, 204, 255));
         btnAdd.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnAdd.setText("+");
+        btnAdd.setFocusable(false);
 
         btnRes.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnRes.setText("=");
+        btnRes.setFocusable(false);
 
         btnSpace.setBackground(new java.awt.Color(0, 0, 0));
         btnSpace.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnSpace.setForeground(new java.awt.Color(255, 255, 255));
         btnSpace.setText("SPACE");
+        btnSpace.setFocusable(false);
 
         btnSubNum.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnSubNum.setText("(-)");
+        btnSubNum.setFocusable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
