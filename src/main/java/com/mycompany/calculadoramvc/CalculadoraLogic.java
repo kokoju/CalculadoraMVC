@@ -7,6 +7,8 @@ import static com.mycompany.calculadoramvc.Operacion.*;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -33,7 +35,7 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
     public CalculadoraLogic(CalculadoraFrame cliente) {
         this.cliente = cliente;
         this.dataFrame = new DataFrame();  // Referencia vacía para el DataFrame
-        registroBotones();  // Registramos botones
+        registroListeners();  // Registramos listeners
         this.puedeRecibirInput = true;  // Por defecto, los botones están activos
         this.archivoBitacora = new File("bitacora.txt");
         this.archivoMemoria = new File("memoria.txt");
@@ -46,7 +48,6 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
         catch (IOException e) {  // Si no se puede, da error
             this.enviarError("NO SE PUDO CREAR LOS ARCHIVOS");
         }
-        System.out.println(arregloMemoria.size());
     }
     
     // Métodos
@@ -98,7 +99,7 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
             this.dataFrame.getTxaData().setText(this.dataFrame.getTxaData().getText() + num + "\n");
     }
 
-    public void registroBotones() {
+    public void registroListeners() {
         // setActionCommand() sirve le asigna un nombre String a la acción que dispara un botón, por lo que eso usaremos para hacer un switch después
         // De normal, getActionCommand() tiene el texto del botón, pero lo establecemos de otra manera para mayor facilidad
         this.cliente.getBtn0().setActionCommand("btn0");
@@ -131,6 +132,44 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
         for (JButton boton : this.cliente.getArregloBtns()) {
             boton.addActionListener(this);
         }
+        
+        // Registro para las teclas, además de activar el focus para que lea el teclado
+        // A todos los botones se les quitó el "focusable": esto permite que no se lleven la atención del teclado
+        this.cliente.setFocusable(true);
+        this.cliente.requestFocusInWindow();
+        this.cliente.addKeyListener(new KeyListener() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                char charObtenido = e.getKeyChar();
+                switch(charObtenido) {
+                    case '0' -> actionBtn0();
+                    case '1' -> actionBtn1();
+                    case '2' -> actionBtn2();
+                    case '3' -> actionBtn3();
+                    case '4' -> actionBtn4();
+                    case '5' -> actionBtn5();
+                    case '6' -> actionBtn6();
+                    case '7' -> actionBtn7();
+                    case '8' -> actionBtn8();
+                    case '9' -> actionBtn9();
+                    case ' ' -> actionBtnSpace();
+                    case '+' -> actionBtnAdd();
+                    case '-' -> actionBtnSub();
+                    case '*' -> actionBtnMul();
+                    case '/' -> actionBtnDiv();
+                    case '\n' -> actionBtnRes();
+                    case '\b' -> actionBtnClear();  // BACKSPACE
+                    case '.' -> actionBtnDot();
+                    
+                }
+            }
+            
+            // Por más que no sea la mejor implementación, no se adaptan los siguientes métodos abstractos
+            @Override
+            public void keyTyped(KeyEvent e) {};
+            @Override
+            public void keyReleased(KeyEvent e) {};
+        });
     }
     
     @Override
@@ -399,6 +438,7 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
     }
     
     public boolean verificarSiNumPrimo(double num) {  // Verificación para saber si un número es primo, tomado de https://es.stackoverflow.com/questions/34895/determinar-si-el-n%C3%BAmero-es-primo
+        num -= obtenerParteFraccionaria(num);  // Para evitar errores, se hace un redondeo hacía abajo
         if (num % 2 == 0) return false;  // Si el número es par, todo par inferior lo va a dividir, entonces no es 
 
         for(int i = 3; i * i <= num; i += 2) {  // Si es impar, se revisan posiciones impares hasta llegar a la mitad del número, ya que un número par no puede dividir a uno impar (empezando desde 3, el primer primo impar)
