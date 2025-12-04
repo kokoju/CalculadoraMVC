@@ -3,14 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.calculadoramvc;
-import static com.mycompany.calculadoramvc.Operacion.*;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
     // Atributos
     private CalculadoraFrame cliente;  // Mantenemos una referencia al cliente
     private DataFrame dataFrame;  // Referencia vacía para el DataFrame
+    private MemoryFrame memoryFrame;  // Referencia a MemoryFrame
     private File archivoBitacora;  // Creamos también una referencia al archivo de bitácora dónde escribimos
     private File archivoMemoria;  // Se crea una referencia para la memoria
     private ArrayList<Double> arregloMemoria;  // Creamos un arreglo dónde guardar los elementos de memoria
@@ -35,6 +37,7 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
     public CalculadoraLogic(CalculadoraFrame cliente) {
         this.cliente = cliente;
         this.dataFrame = new DataFrame();  // Referencia vacía para el DataFrame
+        this.memoryFrame = new MemoryFrame();  // Referencia de la memoria
         registroListeners();  // Registramos listeners
         this.puedeRecibirInput = true;  // Por defecto, los botones están activos
         this.archivoBitacora = new File("bitacora.txt");
@@ -51,9 +54,42 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
     }
     
     // Métodos
+    public void actualizarEnMemory() {  // El espacio de texto de MemoryFrame debe tener la info actualizada, entonces eso se llama en cada iteración
+        this.memoryFrame.getTxaMemory().setText("");  // Se limpia el espacio
+        for (double num : arregloMemoria)  // Se escribe cada número en el espacio
+            this.memoryFrame.getTxaMemory().setText(this.memoryFrame.getTxaMemory().getText() + num + "\n");
+    }
+    
+    public void actualizarEnData() {  // El espacio de texto de DataFrame debe tener la info actualizada, entonces eso se llama en cada iteración
+        this.dataFrame.getTxaData().setText("");  // Se limpia el espacio
+        try {
+            // Leer línea por línea
+            FileReader reader = new FileReader(this.archivoBitacora);
+            BufferedReader buffered = new BufferedReader(reader);  // Se crea, además del lector, un BufferedReader para mejorar la eficiencia
+
+            StringBuilder contenido = new StringBuilder();
+            String linea;
+            while ((linea = buffered.readLine()) != null) {  // Mientras no se llegue al final, se sigue leyendo y añadiendo a las lineas
+                contenido.append(linea).append("\n");
+            }     
+            
+            // Cerramos los lectores del archivo
+            reader.close();
+            buffered.close();
+            
+            // Se muestra el contenido
+            this.dataFrame.getTxaData().setText(contenido.toString());
+            } 
+            catch (IOException ex) {
+                System.getLogger(CalculadoraLogic.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+    }
+    
     public void registrarEnBitacora(String mensaje) {  // Para la escritura de las operaciones en la bitácora, hacemos una función que escriba en el archivo
         try (FileWriter writer = new FileWriter(this.archivoBitacora, true)) {  // Intentamos crear una escritor en el archivo. Además, el 'true' indica que el contenido que pongamos se va a añadir por medio de un .append, permitiendo mantener registros anteriores
             writer.write(mensaje);  // Se escribe en el archivo
+            writer.close();
+            actualizarEnData();
         } catch (IOException e) {  // Si hay una excepción al intentar escribir
             this.enviarError("NO SE PUEDE ESCRIBIR EN LA BITÁCORA");  // Si llega a existir un error al intentar escribir, se muestra en la pantalla de la calculadora
         }
@@ -80,7 +116,7 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
         if (this.arregloMemoria.size() > 10)  // Si nos pasamos del límite
             this.arregloMemoria.removeLast();  // Eliminamos el elemento más antiguo 
         this.registrarEnMemoria();
-        this.actualizarEnData();
+        this.actualizarEnMemory();
     }
     
     public void registrarEnMemoria()  {  // Así como tomamos de la memoria, debemos escribir el contenido que tenemos
@@ -88,15 +124,10 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
             for (Double num : arregloMemoria) {
                 writer.write(num + "\n");  // Se escribe en el archivo, saltando espacios por cada número
             }
+            writer.close();
         } catch (IOException e) {  // Si hay una excepción al intentar escribir
             this.enviarError("NO SE PUEDE ESCRIBIR EN LA MEMORIA");  // Si llega a existir un error al intentar escribir, se muestra en la pantalla de la calculadora
         }
-    }
-    
-    public void actualizarEnData() {  // El espacio de texto de DataFrame debe tener la info actualizada, entonces eso se llama en cada iteración
-        this.dataFrame.getTxaData().setText("");  // Se limpia el espacio
-        for (double num : arregloMemoria)  // Se escribe cada número en el espacio
-            this.dataFrame.getTxaData().setText(this.dataFrame.getTxaData().getText() + num + "\n");
     }
 
     public void registroListeners() {
@@ -116,6 +147,7 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
         this.cliente.getBtnAverage().setActionCommand("btnAverage");
         this.cliente.getBtnBinary().setActionCommand("btnBinary");
         this.cliente.getBtnClear().setActionCommand("btnClear");
+        this.cliente.getBtnMemory().setActionCommand("btnMemory");
         this.cliente.getBtnData().setActionCommand("btnData");
         this.cliente.getBtnDiv().setActionCommand("btnDiv");
         this.cliente.getBtnDot().setActionCommand("btnDot");
@@ -191,6 +223,7 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
                 case "btnAverage" -> actionBtnAverage();
                 case "btnBinary" -> actionBtnBinary();
                 case "btnClear" -> actionBtnClear();
+                case "btnMemory" -> actionBtnMemory();
                 case "btnData" -> actionBtnData();
                 case "btnDiv" -> actionBtnDiv();
                 case "btnDot" -> actionBtnDot();
@@ -307,6 +340,11 @@ public class CalculadoraLogic implements ActionListener {  // Clase encargada de
     
     public void actionBtnClear() {
         this.cliente.getTxaPantalla().setText("");
+    }
+    
+    public void actionBtnMemory() {
+        memoryFrame.setVisible(true);
+        actualizarEnMemory();
     }
     
     public void actionBtnData() {

@@ -39,7 +39,7 @@ public class CalculadoraFrame extends javax.swing.JFrame {  // Frame que tiene n
         btnBinary = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txaPantalla = new javax.swing.JTextArea();
-        btnData = new javax.swing.JButton();
+        btnMemory = new javax.swing.JButton();
         btn7 = new javax.swing.JButton();
         btnPrime = new javax.swing.JButton();
         btn8 = new javax.swing.JButton();
@@ -62,6 +62,7 @@ public class CalculadoraFrame extends javax.swing.JFrame {  // Frame que tiene n
         btnRes = new javax.swing.JButton();
         btnSpace = new javax.swing.JButton();
         btnSubNum = new javax.swing.JButton();
+        btnData = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 102));
@@ -80,14 +81,14 @@ public class CalculadoraFrame extends javax.swing.JFrame {  // Frame que tiene n
         txaPantalla.setFocusable(false);
         jScrollPane1.setViewportView(txaPantalla);
 
-        btnData.setBackground(new java.awt.Color(0, 0, 0));
-        btnData.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        btnData.setForeground(new java.awt.Color(255, 255, 255));
-        btnData.setText("DATA");
-        btnData.setFocusable(false);
-        btnData.addActionListener(new java.awt.event.ActionListener() {
+        btnMemory.setBackground(new java.awt.Color(0, 0, 0));
+        btnMemory.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        btnMemory.setForeground(new java.awt.Color(255, 255, 255));
+        btnMemory.setText("MEMORY");
+        btnMemory.setFocusable(false);
+        btnMemory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDataActionPerformed(evt);
+                btnMemoryActionPerformed(evt);
             }
         });
 
@@ -194,6 +195,17 @@ public class CalculadoraFrame extends javax.swing.JFrame {  // Frame que tiene n
         btnSubNum.setText("(-)");
         btnSubNum.setFocusable(false);
 
+        btnData.setBackground(new java.awt.Color(0, 0, 0));
+        btnData.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        btnData.setForeground(new java.awt.Color(255, 255, 255));
+        btnData.setText("DATA");
+        btnData.setFocusable(false);
+        btnData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDataActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -205,13 +217,16 @@ public class CalculadoraFrame extends javax.swing.JFrame {  // Frame que tiene n
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 2, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(btnPrime, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnBinary, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSpace, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)))
+                            .addComponent(btnSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnMemory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnData, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btn7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -262,8 +277,9 @@ public class CalculadoraFrame extends javax.swing.JFrame {  // Frame que tiene n
                 .addGap(19, 19, 19)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBinary, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnBinary, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                    .addComponent(btnMemory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -305,13 +321,17 @@ public class CalculadoraFrame extends javax.swing.JFrame {  // Frame que tiene n
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDataActionPerformed
+    private void btnMemoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMemoryActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnDataActionPerformed
+    }//GEN-LAST:event_btnMemoryActionPerformed
 
     private void btn8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn8ActionPerformed
+
+    private void btnDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDataActionPerformed
 
     /**
      * @param args the command line arguments
@@ -357,6 +377,7 @@ public class CalculadoraFrame extends javax.swing.JFrame {  // Frame que tiene n
     private javax.swing.JButton btnDiv;
     private javax.swing.JButton btnDot;
     private javax.swing.JButton btnMAdd;
+    private javax.swing.JButton btnMemory;
     private javax.swing.JButton btnMul;
     private javax.swing.JButton btnPrime;
     private javax.swing.JButton btnRes;
@@ -383,6 +404,7 @@ public class CalculadoraFrame extends javax.swing.JFrame {  // Frame que tiene n
         this.arregloBtns.add(btnAverage);
         this.arregloBtns.add(btnBinary);
         this.arregloBtns.add(btnClear);
+        this.arregloBtns.add(btnMemory);
         this.arregloBtns.add(btnData);
         this.arregloBtns.add(btnDiv);
         this.arregloBtns.add(btnDot);
@@ -457,6 +479,10 @@ public class CalculadoraFrame extends javax.swing.JFrame {  // Frame que tiene n
         return btnClear;
     }
 
+    public JButton getBtnMemory() {
+        return btnMemory;
+    }
+    
     public JButton getBtnData() {
         return btnData;
     }

@@ -1,0 +1,12 @@
+6.0 * 2.0 = 12.0
+6.0 * 2.0 = 12.0
+8.0 * 3.0 = 24.0
+88.0 * 3.0 = 264.0
+Bin(5.5) = 101.1
+6.0 * 3.0 = 18.0
+6.0 fue añadido a la memoria
+3.0 fue añadido a la memoria
+3.0 * 6.0 = 18.0
+18.0 fue añadido a la memoria
+Promedio de 18.0 3.0 6.0  = 9.0
+Promedio de 9 6 9  = 8.0
